@@ -2,6 +2,19 @@
 
 #### Instruções de Uso:
 
+0. **Crie o arquivo .env e adicione a chave da api:**
+  URL do site pra gerar o token: [Link](https://home.openweathermap.org/api_keys)
+
+   ```
+   API_KEY = ''
+   MONGO_INITDB_ROOT_USERNAME = 'root'
+   MONGO_INITDB_ROOT_PASSWORD = 'example'
+   MONGODB_URI = 'mongodb://mongodb:27017/'
+
+   ```
+
+   Isso criará e iniciará os contêineres em segundo plano.
+
 1. **Criação e Inicialização dos Contêineres:**
    Execute o seguinte comando no diretório onde o `docker-compose.yml` está localizado:
 
