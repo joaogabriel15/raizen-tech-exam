@@ -27,7 +27,7 @@
 #### Uso das Rotas Atualizado:
 
 1. **Rota de Busca por Coordenadas:**
-   - **Endpoint:** `GET /api/v1/search`
+   - **Endpoint:** `POST /api/v1/search`
    - **Parâmetros de Exemplo:**
      ```json
      {
@@ -37,7 +37,7 @@
      ```
 
 2. **Rota de Busca por Query:**
-   - **Endpoint:** `GET /api/v1/search`
+   - **Endpoint:** `POST /api/v1/search`
    - **Parâmetros de Exemplo:**
      ```json
      {
@@ -47,12 +47,12 @@
      ```
 
 3. **Rota de Busca por ID da Cidade:**
-   - **Endpoint:** `GET /api/v1/search`
+   - **Endpoint:** `POST /api/v1/search`
    - **Parâmetros de Exemplo:**
      ```json
      {
        "type_search": "id",
-       "city_id": 123
+       "city_id": 2960
      }
      ```
 
@@ -65,4 +65,13 @@
        "limit": 10
      }
      ```
+ 
+ ### Executando Testes com o Comando Pytest
+
+Para executar os testes com o Pytest, utilize o seguinte comando:
+
+```bash
+docker-compose run fastapi pytest -v
+```
+
 ---

@@ -131,7 +131,7 @@ def get_weather_api(data: WeatherRequest):
 
 
 
-def get_weather_local(skip:int, limit:int):
+def get_weather_local(skip:int = 0, limit:int = 10):
     """
     Recupera informações meteorológicas locais armazenadas no banco de dados.
 
