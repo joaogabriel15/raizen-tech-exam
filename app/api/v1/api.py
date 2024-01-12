@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Response, status, HTTPException
 from fastapi.responses import JSONResponse
 from app.schemas.WeatherSchema import WeatherRequest
 from app.controllers.weather_controller import get_weather_api, get_weather_local
@@ -6,7 +6,7 @@ from app.controllers.weather_controller import get_weather_api, get_weather_loca
 api = APIRouter(prefix="/api/v1")
 
 
-@api.get('/search')
+@api.post('/search')
 def search_wather(data:WeatherRequest = None) -> Response:
     """
     Rota para buscar informações meteorológicas da API OpenWeatherMap.
@@ -18,8 +18,14 @@ def search_wather(data:WeatherRequest = None) -> Response:
     - Response: Resposta JSON contendo informações meteorológicas.
 
     Exemplo de Uso:
-    - /api/v1/search?data={"type_search": "coordinates", "coordinates": {"lat": 40.7128, "lon": -74.0060}}
+    - POST /api/v1/search/  json={"type_search": "coordinates", "coordinates": {"lat": 40.7128, "lon": -74.0060}}
     """
+    
+    if data is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail='missing or incorrect parameters'
+        )
      
     res = get_weather_api(data)
 
@@ -41,7 +47,7 @@ def search_wather(skip: int = 0, limit: int = 10) -> Response:
     - Response: Resposta JSON contendo informações meteorológicas locais.
 
     Exemplo de Uso:
-    - /api/v1/search/local?skip=0&limit=10
+    - GET /api/v1/search/local?skip=0&limit=10
     """
     res = get_weather_local(skip,limit)
 

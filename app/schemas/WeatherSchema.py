@@ -10,8 +10,8 @@ class Coordinates(BaseModel):
 
 class Query(BaseModel):
     city_name: Optional[str] = None
-    state_code: Optional[int] = None
-    coutry_code: Optional[int] = None
+    state_code: Optional[str] = None
+    coutry_code: Optional[str] = None
 
 class TypeSearch(str, Enum):
     coordinates = 'coordinates'

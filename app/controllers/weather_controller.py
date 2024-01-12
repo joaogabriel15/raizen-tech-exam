@@ -50,7 +50,7 @@ def get_weather_api(data: WeatherRequest):
         - dict: Resposta JSON contendo informações meteorológicas para as coordenadas especificadas.
         """
 
-        response = get(f"https://{_api_url}/data/2.5/forecast?lat={coordinates.lat}&lon={coordinates.lon}&lang={_lang}&units={_units }&appid={_api_key}")
+        response = get(f"https://{_api_url}/data/2.5/forecast?lat={coordinates['lat']}&lon={coordinates['lon']}&lang={_lang}&units={_units }&appid={_api_key}")
 
         if response.status_code == 404:
             raise HTTPException(
@@ -77,11 +77,13 @@ def get_weather_api(data: WeatherRequest):
 
         q = []
 
+        print(query)
         for params in query:
-            if params is not None:
-                q.append(params)
+            if query[params] is not None:
+                q.append(query[params])
+        print(f"https://{_api_url}/data/2.5/forecast?q={','.join(q) if len(q) > 1 else q[0]}&lang={_lang}&units={_units }&appid={_api_key}")
 
-        response = get(f"https://{_api_url}/data/2.5/forecast?q={','.join(q)}&lang={_lang}&units={_units }&appid={_api_key}")
+        response = get(f"https://{_api_url}/data/2.5/forecast?q={','.join(q) if len(q) > 1 else q[0]}&lang={_lang}&units={_units }&appid={_api_key}")
         
         if response.status_code == 404:
             raise HTTPException(
