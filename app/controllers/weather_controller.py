@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status
 from datetime import datetime
+from bson import json_util
 from requests import get
 from os import getenv
 from app.schemas.WeatherSchema import WeatherRequest, WeatherResponse, TypeSearch
@@ -57,5 +58,12 @@ def get_weather_api(data: WeatherRequest):
             detail='Incorrect or missing parameters.'
         )
 
-def get_weather_local():
-    pass
+
+
+def get_weather_local(skip:int, limit:int):
+    cursor = colletion.find({}).skip(skip).limit(limit)
+    documents = list(cursor)
+    json_data = json_util.dumps(documents, default=json_util.default, indent=2)
+
+
+    return json_data
