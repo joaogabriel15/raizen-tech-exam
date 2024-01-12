@@ -1,18 +1,14 @@
-from uvicorn import run
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.routes import routes
 
+# Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
-app = FastAPI()
 
+# Inicializa a aplicação FastAPI.
+app = FastAPI(title="Weather API Cache")
+
+
+# Inclui as rotas definidas no iterable 'routes' na aplicação.
 for route in routes:
     app.include_router(route)
-
-
-   
-
-
-
-if __name__ == "__main__":
-    run("main:app", port=8000, log_level="debug")

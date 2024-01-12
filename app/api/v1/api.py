@@ -8,6 +8,19 @@ api = APIRouter(prefix="/api/v1")
 
 @api.get('/search')
 def search_wather(data:WeatherRequest = None) -> Response:
+    """
+    Rota para buscar informações meteorológicas da API OpenWeatherMap.
+
+    Parâmetros:
+    - data (WeatherRequest): Dados de requisição contendo os parâmetros de busca.
+
+    Retorna:
+    - Response: Resposta JSON contendo informações meteorológicas.
+
+    Exemplo de Uso:
+    - /api/v1/search?data={"type_search": "coordinates", "coordinates": {"lat": 40.7128, "lon": -74.0060}}
+    """
+     
     res = get_weather_api(data)
 
     return JSONResponse(
@@ -17,6 +30,19 @@ def search_wather(data:WeatherRequest = None) -> Response:
 
 @api.get('/search/local')
 def search_wather(skip: int = 0, limit: int = 10) -> Response:
+    """
+    Rota para buscar informações meteorológicas locais armazenadas no banco de dados.
+
+    Parâmetros:
+    - skip (int): Número de documentos a serem ignorados antes de começar a recuperar dados.
+    - limit (int): Número máximo de documentos a serem recuperados.
+
+    Retorna:
+    - Response: Resposta JSON contendo informações meteorológicas locais.
+
+    Exemplo de Uso:
+    - /api/v1/search/local?skip=0&limit=10
+    """
     res = get_weather_local(skip,limit)
 
     return Response(
