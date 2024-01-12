@@ -71,6 +71,8 @@
 Para executar os testes com o Pytest, utilize o seguinte comando:
 
 ```bash
+docker-compose build
+
 docker-compose run fastapi pytest -v
 ```
 
