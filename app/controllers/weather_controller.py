@@ -81,7 +81,6 @@ def get_weather_api(data: WeatherRequest):
         for params in query:
             if query[params] is not None:
                 q.append(query[params])
-        print(f"https://{_api_url}/data/2.5/forecast?q={','.join(q) if len(q) > 1 else q[0]}&lang={_lang}&units={_units }&appid={_api_key}")
 
         response = get(f"https://{_api_url}/data/2.5/forecast?q={','.join(q) if len(q) > 1 else q[0]}&lang={_lang}&units={_units }&appid={_api_key}")
         
